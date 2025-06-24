@@ -20,7 +20,6 @@ db = SQLAlchemy(app)
 auth = HTTPBasicAuth()
 
 # --- Modelos de Base de Datos ---
-# Un "modelo" es una clase Python que SQLAlchemy mapea a una tabla en la base de datos.
 
 class User(db.Model):
     """
@@ -110,8 +109,7 @@ def register():
 
     # Verifica si el nombre de usuario ya está en uso.
     if User.query.filter_by(username=username).first():
-        return jsonify({"mensaje": "El usuario ya existe"}), 409 # 409 Conflict
-
+        return jsonify({"mensaje": "El usuario ya existe"}), 409 
     # Crea un nuevo usuario, hashea la contraseña y lo guarda en la base de datos.
     new_user = User(username=username)
     new_user.set_password(password) # Aquí se hashea la contraseña
@@ -138,9 +136,9 @@ def login():
     user = User.query.filter_by(username=username).first()
     # Si el usuario existe y la contraseña es correcta, el inicio de sesión es exitoso.
     if user and user.check_password(password):
-        return jsonify({"mensaje": "Inicio de sesión exitoso"}), 200 # 200 OK
+        return jsonify({"mensaje": "Inicio de sesión exitoso"}), 200 
     else:
-        return jsonify({"mensaje": "Credenciales inválidas"}), 401 # 401 Unauthorized
+        return jsonify({"mensaje": "Credenciales inválidas"}), 401 
 
 @app.route('/tareas', methods=['GET'])
 @auth.login_required # Este decorador protege la ruta, exigiendo autenticación básica.
@@ -154,6 +152,5 @@ def get_tareas():
 
 # --- Ejecución del Servidor ---
 if __name__ == '__main__':
-    # Ejecuta la aplicación Flask en modo depuración.
-    # En un entorno de producción, usar un servidor WSGI como Gunicorn o uWSGI.
+    
     app.run(debug=True)

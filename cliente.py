@@ -7,7 +7,7 @@ BASE_URL = "http://127.0.0.1:5000"
 
 # Almacenaremos las credenciales del usuario autenticado aquí
 # para poder usarlas en solicitudes protegidas.
-# En una aplicación real, esto sería más sofisticado (tokens, sesiones, etc.).
+
 AUTH_USERNAME = None
 AUTH_PASSWORD = None
 
@@ -73,7 +73,7 @@ def obtener_tareas():
         response = requests.get(url, headers=headers)
         response.raise_for_status()
 
-        # Como /tareas devuelve HTML, lo imprimimos directamente.
+        
         print(f"Obtener Tareas: {response.status_code}")
         print("\n--- Contenido HTML de la página de Tareas ---")
         print(response.text)
@@ -119,6 +119,6 @@ def menu():
             print("Opción no válida. Intente de nuevo.")
 
 if __name__ == '__main__':
-    # Asegúrate de que el servidor Flask esté corriendo antes de ejecutar el cliente
+    
     print("Asegúrese de que el servidor (servidor.py) esté en ejecución en http://127.0.0.1:5000")
     menu()
